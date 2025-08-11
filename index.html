@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lorenzo SharePoint Helper – Demo</title>
   <style>
-    /* === THEME: Black + Red (único) === */
     :root{
       --bg:#0a0a0a;
       --panel:#0c0c0f;
       --panel-2:#09090b;
-      --accent:#ef4444;     /* rojo principal */
-      --accent-2:#b91c1c;   /* rojo profundo */
+      --accent:#ef4444;
+      --accent-2:#b91c1c;
       --text:#f3f4f6;
       --muted:#9ca3af;
       --danger:#ef4444;
@@ -146,7 +145,6 @@
       #topbar span{ animation:none !important }
     }
 
-    /* ===== PRELOADER simple + Top progress ===== */
     #preloader{
       position:fixed; inset:0; z-index:9999;
       background:#000;
@@ -172,41 +170,34 @@
     ::-webkit-scrollbar{ height:10px; width:10px }
     ::-webkit-scrollbar-thumb{ background: linear-gradient(#b91c1c,#7f1d1d); border-radius:10px }
 
-/* Añade/ajusta estas variables en :root */
 :root{
-  /* ...lo que ya tienes... */
-  --logo-max: 620px;     /* tamaño máximo del logo en px (ajústalo) */
-  --logo-scale: 1.6;     /* escala final del zoom (1 = tamaño real) */
+  --logo-max: 620px;
+  --logo-scale: 1.6;
 }
 
-/* Centrado perfecto del preloader */
 #preloader{
   position:fixed; inset:0; z-index:9999;
   background:#000;
-  /* usa grid para centrar al 100% */
   display:grid; place-items:center;
   transition:opacity .5s ease, visibility .5s ease;
 }
 
-/* Logo con animación de acercamiento */
 .logo-img{
-  width: min(70vw, var(--logo-max));   /* más grande que antes */
+  width: min(70vw, var(--logo-max));
   height: auto;
   filter: drop-shadow(0 0 20px rgba(239,68,68,.25));
   transform-origin:center;
-  opacity:0; transform: scale(.9);     /* arranca pequeño */
+  opacity:0; transform: scale(.9);
   will-change: transform, opacity;
   animation: popIn .9s cubic-bezier(.2,.8,.2,1) .1s forwards;
 }
 
-/* Keyframes del zoom */
 @keyframes popIn{
   0%   { transform: scale(.6);  opacity:0; }
-  60%  { transform: scale(calc(var(--logo-scale) * 1.25)); opacity:1; } /* pequeño “overshoot” */
+  60%  { transform: scale(calc(var(--logo-scale) * 1.25)); opacity:1; }
   100% { transform: scale(var(--logo-scale)); opacity:1; }
 }
 
-/* opcional: pulso sutil mientras está visible */
 .logo-img.pulse {
   animation: popIn 1s cubic-bezier(.9,.8,.8,1) .5s forwards,
              breathe 2.4s ease-in-out 1s infinite;
@@ -333,8 +324,7 @@
       sendQuestion(btn.getAttribute('data-q'));
     });
 
-    /* ===== Preloader duration + topbar progress ===== */
-    const MIN_PRELOADER_TIME = 2000; // ajusta a 3000-4000 si quieres
+    const MIN_PRELOADER_TIME = 2000;
     const bar = document.querySelector('#topbar span');
     let p = 0;
     const startTime = Date.now();
