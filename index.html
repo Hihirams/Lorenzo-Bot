@@ -17,7 +17,6 @@
       --bot:#1f2937;
       --me:#0ea5e9;
 
-      /* escalas fluidas */
       --radius: 18px;
       --pad: clamp(10px, 1.2vw, 16px);
       --fs: clamp(14px, 1.6vw, 15px);
@@ -40,7 +39,6 @@
 
     .card{
       width: min(920px, 95vw);
-      /* Alto usa unidad segura de viewport en móviles (ajustada por JS) */
       height: min(78svh, 700px);
       background: linear-gradient(180deg, var(--panel), var(--panel-2));
       border:1px solid #1f2937;
@@ -59,7 +57,7 @@
 
     .avatar{
       width:var(--avatar); height:var(--avatar); border-radius:50%;
-      background-image: url("botpicture.png"); /* usa ruta server-relative */
+      background-image: url("botpicture.png");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -128,7 +126,6 @@
     .error{ color: var(--danger); }
     .footnote{ color:var(--muted); font-size:var(--fs-sm); padding:6px 14px 12px }
 
-    /* ====== RESPONSIVE ====== */
     @media (max-width: 820px){
       .card{ height: min(82svh, 720px); }
       .status{ position:static; margin-left:auto; }
@@ -138,12 +135,12 @@
       body{ padding: 8px; }
       .card{
         width: 100%;
-        height: calc(var(--vh, 1svh) * 100); /* corrige barra de direcciones móvil */
+        height: calc(var(--vh, 1svh) * 100);
         border-radius: 14px;
       }
       .header{ padding:10px 12px; gap:10px; }
-      .subtitle{ display:none; } /* ganamos espacio */
-      .msg{ max-width: 100%; }   /* burbujas ancho completo */
+      .subtitle{ display:none; }
+      .msg{ max-width: 100%; }
       .quick{ grid-template-columns: 1fr 1fr; }
     }
 
@@ -152,7 +149,6 @@
       .avatar{ box-shadow: 0 0 0 2px #0b0f14cc; }
     }
 
-    /* Accesibilidad: menos animación si el usuario lo pide */
     @media (prefers-reduced-motion: reduce){
       *{animation:none !important; transition:none !important}
     }
@@ -195,17 +191,15 @@
   </div>
 
   <script>
-    // ===== CONFIG =====
     const ENDPOINT = "https://sharepoint-helper-lang.cognitiveservices.azure.com";
     const PROJECT  = "SharePointHelperKB";
     const DEPLOY   = "production";
     const API_VER  = "2021-10-01";
-    const KEY      = "PoL5AILp8KagtVUZ1k9OwSsyjDIsTlLhbxRRReQpHX0Piaaxvy4dJQQJ99BHACYeBjFXJ3w3AAAaACOGo4Ai"; // ⚠️ Solo demo
+    const KEY      = "PoL5AILp8KagtVUZ1k9OwSsyjDIsTlLhbxRRReQpHX0Piaaxvy4dJQQJ99BHACYeBjFXJ3w3AAAaACOGo4Ai";
 
     const logEl = document.getElementById('log');
     const quick = document.getElementById('quickbar');
 
-    // Fix 100vh en iOS/Android: calcula --vh en tiempo real
     function setVh(){
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -261,7 +255,6 @@
       }
     }
 
-    // Click en opciones
     quick.addEventListener('click', (e)=>{
       const btn = e.target.closest('button[data-q]');
       if(!btn) return;
