@@ -409,3 +409,18 @@ body.light #langToggleBtn {
   color: #111;
 }
 
+.msg-media{
+  max-width:100%;
+  border-radius:10px;
+  display:block;
+  margin:8px 0;
+}
+
+.msg-link{ margin-top:8px; }
+.msg-link a{
+  display:inline-flex; align-items:center; gap:6px;
+  text-decoration:none;
+  color: var(--accent);
+  border-bottom: 1px dashed currentColor;
+}
+.msg-link a:hover{ border-bottom-style: solid; }
