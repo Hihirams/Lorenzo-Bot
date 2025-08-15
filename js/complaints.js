@@ -161,46 +161,54 @@ async function sendData(){
     const isAppsScript = window.COMPLAINTS_WEBHOOK.includes('script.google.com');
 
     if (isAppsScript){
-      // Enviar como JSON, adjunto en base64
-      let adjuntoBase64 = '', adjuntoNombre = '', adjuntoMime = '';
-      if (file) {
-        adjuntoNombre = file.name;
-        adjuntoMime = file.type;
-        adjuntoBase64 = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => {
-            const base64 = String(reader.result).split(',')[1] || '';
-            resolve(base64);
-          };
-          reader.onerror = reject;
-          reader.readAsDataURL(file);
-        });
-      }
-      const payload = {
-        source: 'complaints-modal@web',
-        ...basic,
-        adjuntoBase64,
-        adjuntoNombre,
-        adjuntoMime
-      };
-      const res = await fetch(window.COMPLAINTS_WEBHOOK, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const j = await res.json();
-      console.log('AppsScript result:', j);
-      if (!res.ok) throw new Error('Error HTTP '+res.status);
-      return 'webhook';
-    } else {
-      const res = await fetch(window.COMPLAINTS_WEBHOOK, {
-        method:'POST',
-        headers:{ 'Content-Type':'application/json' },
-        body: JSON.stringify({ source:'complaints-modal@web', ...basic })
-      });
-      if (!res.ok) throw new Error('Error HTTP '+res.status);
-      return 'webhook';
-    }
+  // Construimos payload base
+  const payload = {
+    source: 'complaints-modal@web',
+    ...basic
+  };
+
+  // Adjuntar archivo como base64 (si existe)
+  if (file) {
+    const base64 = await new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(String(r.result).split(',')[1] || '');
+      r.onerror = reject;
+      r.readAsDataURL(file);
+    });
+    payload.adjuntoBase64 = base64;
+    payload.adjuntoNombre = file.name;
+    payload.adjuntoMime   = file.type;
+  }
+
+function getSafeWebhookUrl(raw){
+  if (typeof raw !== 'string') return '';
+  let u = raw.trim();
+  u = u.replace(/^hhttps:\/\//i, 'https://')
+       .replace(/^http s:\/\//i, 'https://')
+       .replace(/^http:\/\//i, 'https://');
+  return u;
+}
+// y luego:
+const webhook = getSafeWebhookUrl(window.COMPLAINTS_WEBHOOK);
+
+
+  // 👇 Enviar como x-www-form-urlencoded para evitar preflight CORS
+  const res = await fetch(window.COMPLAINTS_WEBHOOK, {
+    method: 'POST',
+    body: new URLSearchParams(payload)    // ← sin headers
+  });
+
+  // Apps Script retorna JSON (tu doPost lo hace)
+  let j = {};
+  try { j = await res.json(); } catch(_) {}
+
+  console.log('AppsScript result:', j);
+  if (!res.ok || (j && j.ok === false)) {
+    throw new Error('Webhook devolvió error');
+  }
+  return 'webhook';
+}
+
   }
 
   const to = (basic.email && basic.email.endsWith('@empresa.com')) ? basic.email : 'soporte@empresa.com';
