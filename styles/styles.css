@@ -14,7 +14,7 @@
   --pad:clamp(10px, 1.2vw, 16px);
   --fs:clamp(14px, 1.6vw, 15px);
   --fs-sm:clamp(11.5px, 1.2vw, 12.5px);
-  --avatar:clamp(32px, 4vw, 40px);
+  --avatar:clamp(70px, 8vw, 80px);
 
   --logo-max: 620px;
   --logo-scale: 1.6;
@@ -32,6 +32,10 @@
   --bot:#ffffff;
   --me:#fff5f5;
 }
+
+:root[data-theme="light"] {
+  --accent: white;
+  }
 
 *{ box-sizing:border-box }
 html,body{ height:100% }
@@ -94,14 +98,16 @@ body{
 }
 
 .avatar{
-  width:var(--avatar); height:var(--avatar); border-radius:25%;
+  width:var(--avatar); height:var(--avatar); border-radius:50%;
+  background-color:#c7052f;
   background-image: url("../img/botpicture1.png");
   background-size:contain; background-position:center; background-repeat:no-repeat;
   box-shadow:0 0 0 3px #0b0f14cc, 0 0 16px #ef444480, 0 0 32px #ef444440;
   flex:0 0 auto;
 }
-:root[data-theme="light"] .avatar{
-  box-shadow:0 0 0 3px rgba(220,38,38,.18), 0 6px 20px rgba(220,38,38,.12);
+
+:root[data-theme="dark"] .avatar {
+  background-color: transparent;
 }
 
 .title{ font-weight:650; letter-spacing:.2px; font-size:clamp(14px,2vw,16px); color:var(--text) }
@@ -338,37 +344,155 @@ body{
   #topbar span{ animation:none !important }
 }
 
+/* ===== Mobile ultra (≈ iPhone 12 mini / 378px) ===== */
 @media (max-width: 420px){
   .header{
-    flex-wrap: wrap;
+    flex-wrap: wrap;               /* permite 2 filas */
     row-gap: 8px;
   }
 
+  /* La etiqueta de estado ocupa su propia fila */
   .header .status{
     order: 2;
     margin-left: 0;
-    flex-basis: 100%;
+    flex-basis: 100%;              /* rompe línea */
   }
 
-  #openComplaintsBtn{
+  /* Controles: Quejas + Tema + Idioma en la 2ª fila, a la derecha */
+  #openComplaintsBtn{              /* Quejas */
     order: 3;
-    position: static !important;
-    margin-left: auto;
+    position: static !important;   /* anula el absolute del desktop */
+    margin-left: auto;             /* empuja el grupo a la derecha */
     height: 36px;
     padding: 0 12px;
   }
 
-  #themeToggleBtn{
+  #themeToggleBtn{                 /* Tema */
     order: 4;
     position: static;
     margin-left: 8px;
-    width: 40px; height: 40px;
+    width: 40px; height: 40px;     /* mejor touch target */
   }
 
-  #langToggleBtn{
+  #langToggleBtn{                  /* Idioma */
     order: 5;
     position: static;
     margin-left: 8px;
-    width: 40px; height: 40px;
+    width: 40px; height: 40px;     /* mejor touch target */
   }
+}
+
+/* === LIGHT THEME - MATCH MOCK (header rojo + tabs rojos) === */
+:root[data-theme="light"] .header{
+  /* rojo con degradado como en el mock */
+  background: linear-gradient(180deg,#ef4444,#b91c1c);
+  border-bottom: none;
+}
+:root[data-theme="light"] .header .title{ color:#fff; }
+:root[data-theme="light"] .header .subtitle{ color:#fffb; }
+:root[data-theme="light"] .header .status{ color:#fff; }
+:root[data-theme="light"] .avatar{
+  /* sombrita suave blanca en lugar de roja fuerte */
+  box-shadow:0 0 0 2px #ffffff33, 0 6px 20px #00000022;
+}
+
+/* Botones del header (tema/idioma) como pills con borde blanco */
+:root[data-theme="light"] #themeToggleBtn,
+:root[data-theme="light"] #langToggleBtn{
+  background: transparent;
+  border:1px solid rgba(255,255,255,.6);
+  color:#fff;
+  box-shadow:none;
+}
+:root[data-theme="light"] #themeToggleBtn:hover,
+:root[data-theme="light"] #langToggleBtn:hover{
+  box-shadow:0 0 0 3px rgba(255,255,255,.18);
+}
+
+/* Quickbar pegada al header rojo, con botones tipo tabs */
+:root[data-theme="light"] .quick{
+  background: linear-gradient(180deg,#ef4444,#b91c1c);
+  border-bottom:none;
+  padding:12px;
+}
+:root[data-theme="light"] .quick button{
+  background: #991b1b;           /* rojo oscuro */
+  color:#fff;
+  border:1px solid #7f1d1d;
+  box-shadow: inset 0 0 0 0 transparent, 0 6px 14px rgba(0,0,0,.15);
+}
+:root[data-theme="light"] .quick button:hover{
+  background:#7f1d1d;
+  border-color:#7f1d1d;
+  box-shadow:0 8px 20px rgba(0,0,0,.18);
+}
+
+/* Burbujas del chat se mantienen claras sobre fondo blanco */
+:root[data-theme="light"] .log{
+  background:
+    radial-gradient(600px 400px at 100% 100%, rgba(220,38,38,.06), transparent 60%),
+    radial-gradient(600px 400px at 0% 0%, rgba(153,27,27,.04), transparent 50%);
+}
+
+/* === LIGHT THEME con colores personalizados === */
+
+/* Fondo header y quickbar */
+:root[data-theme="light"] .header {
+  background: #db0432;
+  border-bottom: none;
+}
+:root[data-theme="light"] .quick {
+  background: #db0432;
+  border-top: none;
+  border-bottom: none;
+}
+
+/* Texto header */
+:root[data-theme="light"] .header .title,
+:root[data-theme="light"] .header .subtitle,
+:root[data-theme="light"] .header .status {
+  color: #fff;
+}
+
+/* Iconos (lang, theme, quejas) sin contorno */
+:root[data-theme="light"] #themeToggleBtn,
+:root[data-theme="light"] #langToggleBtn,
+:root[data-theme="light"] .btn-quejas {
+  background: transparent;
+  border: none !important;
+  color: #fff;
+  box-shadow: none;
+}
+:root[data-theme="light"] #themeToggleBtn:hover,
+:root[data-theme="light"] #langToggleBtn:hover,
+:root[data-theme="light"] .btn-quejas:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Botones de quickbar */
+:root[data-theme="light"] .quick button {
+  background: #c7052f;
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,.15);
+}
+:root[data-theme="light"] .quick button:hover {
+  background: #a3241d;
+}
+
+/* Botones de opciones en el chat */
+:root[data-theme="light"] .option-chip {
+  background: #c7052f;
+  color: #fff;
+  border: none;
+}
+:root[data-theme="light"] .option-chip:hover {
+  background: #a3241d;
+}
+
+/* Mensajes del bot en blanco */
+:root[data-theme="light"] .bot {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 18px rgba(16,24,40,.06), inset 0 1px 0 rgba(255,255,255,.7);
 }
