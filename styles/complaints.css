@@ -59,7 +59,6 @@ input[type="file"]{
 }
 .toast[show]{ display:block; }
 
-/* ===== Light Theme Overrides ===== */
 body.light,
 body[data-theme="light"] {
   --panel: #ffffff;
@@ -71,7 +70,6 @@ body[data-theme="light"] {
   --shadow: 0 10px 30px rgba(0,0,0,.15);
 }
 
-/* Tarjeta, header y cuerpo */
 body.light .modal-card,
 body[data-theme="light"] .modal-card { background: var(--panel); color: var(--text); border-color:#e5e7eb; }
 body.light .modal-header,
@@ -79,7 +77,6 @@ body[data-theme="light"] .modal-header { border-bottom-color:#e5e7eb; }
 body.light .modal-body,
 body[data-theme="light"] .modal-body { background: var(--panel-2); }
 
-/* Tipografías auxiliares */
 body.light label,
 body.light .help,
 body.light .counter,
@@ -87,7 +84,6 @@ body[data-theme="light"] label,
 body[data-theme="light"] .help,
 body[data-theme="light"] .counter { color: var(--muted); }
 
-/* Inputs/selects/textarea en claro */
 body.light input[type="text"],
 body.light input[type="email"],
 body.light select,
@@ -108,17 +104,14 @@ body[data-theme="light"] input[type="file"] {
   border-color:#cbd5e1;
 }
 
-/* Botones neutrales en claro */
 body.light .btn,
 body[data-theme="light"] .btn { background:#f8fafc; color:#111827; border-color:#e5e7eb; }
 body.light .btn:hover,
 body[data-theme="light"] .btn:hover { background:#eef2f7; }
 
-/* Primario conserva el gradiente rojo */
 body.light .btn.primary,
 body[data-theme="light"] .btn.primary { background:linear-gradient(180deg,var(--accent),var(--accent-2)); color:#fff; border:none; }
 
-/* Cerrar y toast */
 body.light .modal-close,
 body[data-theme="light"] .modal-close { color:var(--muted); }
 body.light .modal-close:hover,
@@ -126,17 +119,8 @@ body[data-theme="light"] .modal-close:hover { background:#00000010; }
 body.light .toast,
 body[data-theme="light"] .toast { background:#ffffff; color:#111827; border-color:#e5e7eb; box-shadow:0 10px 30px rgba(0,0,0,.15); }
 
-/* Overlay, igual para ambos temas */
 .modal { background: rgba(0,0,0,0.45); }
 
-/* =========================================================
-   Forzar estilos claros del MODAL (alta especificidad)
-   Soporta cualquiera de estos toggles de tema:
-   - body.light
-   - body[data-theme="light"]
-   - html[data-theme="light"]
-   - .card.light   (por si tu toggle aplica en la tarjeta)
-========================================================= */
 :is(body.light, body[data-theme="light"], html[data-theme="light"], .card.light)
   #complaintsModal .modal-card {
   background: #ffffff !important;
@@ -155,7 +139,6 @@ body[data-theme="light"] .toast { background:#ffffff; color:#111827; border-colo
   background: #f8fafc !important;
 }
 
-/* Inputs, selects y textarea en claro */
 :is(body.light, body[data-theme="light"], html[data-theme="light"], .card.light)
   #complaintsModal input[type="text"],
 :is(body.light, body[data-theme="light"], html[data-theme="light"], .card.light)
@@ -169,7 +152,6 @@ body[data-theme="light"] .toast { background:#ffffff; color:#111827; border-colo
   border-color: #d1d5db !important;
 }
 
-/* File input */
 :is(body.light, body[data-theme="light"], html[data-theme="light"], .card.light)
   #complaintsModal input[type="file"] {
   background: #ffffff !important;
@@ -177,7 +159,6 @@ body[data-theme="light"] .toast { background:#ffffff; color:#111827; border-colo
   border-color: #cbd5e1 !important;
 }
 
-/* Textos auxiliares */
 :is(body.light, body[data-theme="light"], html[data-theme="light"], .card.light)
   #complaintsModal label,
 :is(body.light, body[data-theme="light"], html[data-theme="light"], .card.light)
@@ -187,7 +168,6 @@ body[data-theme="light"] .toast { background:#ffffff; color:#111827; border-colo
   color: #475569 !important;
 }
 
-/* Botones neutrales y primario */
 :is(body.light, body[data-theme="light"], html[data-theme="light"], .card.light)
   #complaintsModal .btn {
   background: #f8fafc !important;
@@ -205,7 +185,6 @@ body[data-theme="light"] .toast { background:#ffffff; color:#111827; border-colo
   border: none !important;
 }
 
-/* Botón cerrar y toast */
 :is(body.light, body[data-theme="light"], html[data-theme="light"], .card.light)
   #complaintsModal .modal-close { color: #475569 !important; }
 :is(body.light, body[data-theme="light"], html[data-theme="light"], .card.light)
@@ -219,16 +198,13 @@ body[data-theme="light"] .toast { background:#ffffff; color:#111827; border-colo
   box-shadow: 0 10px 30px rgba(0,0,0,.15) !important;
 }
 
-/* --- Botón Quejas: alineación responsiva --- */
 
-/* Desktop: mismo “sistema” que los otros controles del header */
-.header { position: relative; } /* por si faltara */
+.header { position: relative; }
 .btn-quejas{
-  /* reset de hacks de margen si existieran */
   margin: 0 !important;
 
   position: absolute;
-  right: 168px; /* queda a la izquierda de lang (120) y tema (72) */
+  right: 168px;
   top: 10px;
   height: 36px;
   display: inline-flex;
@@ -238,35 +214,29 @@ body[data-theme="light"] .toast { background:#ffffff; color:#111827; border-colo
   border-radius: 999px;
 }
 
-/* Hover/foco consistente con los otros */
 .btn-quejas:focus-visible{ outline:3px solid #ffffff44; outline-offset:2px; }
 
-/* Light theme (por consistencia con los otros controles) */
 :root[data-theme="light"] .btn-quejas{
-  background: linear-gradient(180deg,#ffffff,#f3f4f6);
-  color: #0f172a;
+  color: white;
   border: 1px solid #e5e7eb;
 }
 
-/* <=820px: todos los controles del header se vuelven estáticos y ordenables */
 @media (max-width:820px){
   .btn-quejas{
     position: static;
-    order: 3;           /* aparece primero de los 3 */
-    margin-left: auto;  /* empuja hacia la derecha */
+    order: 3;
+    margin-left: auto;
   }
   #themeToggleBtn{ order: 4; position: static; margin-left: 8px; }
   #langToggleBtn { order: 5; position: static; margin-left: 8px; }
 }
 
-/* El modal ocupa la pantalla con un margen seguro */
 .modal-card{
-  max-height: 92svh;     /* seguro en móviles con barras */
-  overflow: auto;        /* scroll interno si hace falta */
+  max-height: 92svh;
+  overflow: auto;
   width: min(720px, 96vw);
 }
 
-/* Botones de acciones: en columna en móviles */
 @media (max-width:480px){
   .actions{
     flex-direction: column;
@@ -277,7 +247,8 @@ body[data-theme="light"] .toast { background:#ffffff; color:#111827; border-colo
     width: 100%;
   }
   .consent-wrap{
-    align-items: flex-start; /* para que no desborde horizontal */
+    align-items: flex-start;
   }
 }
+
 
