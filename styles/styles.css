@@ -33,10 +33,6 @@
   --me:#fff5f5;
 }
 
-:root[data-theme="light"] {
-  --accent: white;
-  }
-
 *{ box-sizing:border-box }
 html,body{ height:100% }
 
@@ -495,4 +491,33 @@ body{
   background: #ffffff;
   border: 1px solid #e5e7eb;
   box-shadow: 0 6px 18px rgba(16,24,40,.06), inset 0 1px 0 rgba(255,255,255,.7);
+}
+
+:root[data-theme="light"] .msg-link a {
+  color: var(--accent); /* Usa el rojo definido para el tema claro */
+  border-bottom: 1px dashed var(--accent);
+}
+:root[data-theme="light"] .msg-link a:hover {
+  border-bottom-style: solid;
+  color: var(--accent-2); /* Un rojo más oscuro al pasar el mouse */
+}
+
+/* Global keyframes: solo uno */
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 var(--pulse-color, var(--accent)); }
+  70%  { box-shadow: 0 0 0 10px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+/* Por defecto usa --accent */
+.pulse {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--pulse-color, var(--accent));
+  box-shadow:0 0 0 0 var(--pulse-color, var(--accent));
+  animation:pulse 1.8s infinite;
+}
+
+/* Tema light: solo para pulse */
+:root[data-theme="light"] {
+  --pulse-color: #fff;
 }
