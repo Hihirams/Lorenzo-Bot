@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lorenzo SharePoint Helper – Demo (Flujo de decisiones)</title>
   <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="styles/complaints.css">
 </head>
 <body>
   <div id="topbar" aria-hidden="true"><span></span></div>
@@ -27,6 +28,14 @@
         <img id="themeIcon" src="img/sun.png" alt="Tema claro">
       </button>
 
+<!-- <button id="openComplaintsBtn" class="btn-quejas" aria-haspopup="dialog" title="Enviar queja o sugerencia">
+  ícono simple 
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="18" height="18">
+    <path d="M3 11a8 8 0 018-8h2a8 8 0 010 16h-1l-4 3v-3H9A8 8 0 013 11Z" stroke="currentColor" stroke-width="1.5"/>
+  </svg>
+  <span>Quejas</span>
+</button>-->
+
       <button id="langToggleBtn" class="lang-toggle" aria-label="Cambiar idioma" aria-pressed="false" title="Cambiar idioma">
         <img id="langFlag" src="img/mx-flag.png" alt="Bandera idioma">
       </button>
@@ -45,7 +54,104 @@
 
     <div class="footnote">Versión 1.2.0</div>
   </div>
+<!-- Modal de Quejas / Sugerencias -->
+<div id="complaintsModal" class="modal" aria-hidden="true" aria-modal="true" role="dialog" aria-labelledby="complaintsTitle">
+  <div class="modal-card" role="document">
+    <div class="modal-header">
+      <div class="modal-title" id="complaintsTitle">Enviar queja o sugerencia</div>
+      <button class="modal-close" id="closeComplaintsBtn" aria-label="Cerrar (Esc)">✕</button>
+    </div>
 
+    <form id="complaintsForm" class="modal-body" novalidate>
+      <div class="grid-2">
+        <div>
+          <label for="tipo">Tipo</label>
+          <select id="tipo" name="tipo" required>
+            <option value="">Selecciona…</option>
+            <option>Queja</option>
+            <option>Bug / Error</option>
+            <option>Sugerencia</option>
+            <option>Idea de mejora</option>
+          </select>
+          <div class="error" data-error-for="tipo"></div>
+        </div>
+        <div>
+          <label for="severidad">Severidad</label>
+          <select id="severidad" name="severidad" required>
+            <option value="">Selecciona…</option>
+            <option>Baja</option>
+            <option>Media</option>
+            <option>Alta</option>
+            <option>Crítica</option>
+          </select>
+          <div class="error" data-error-for="severidad"></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <label for="modulo">Módulo (opcional)</label>
+          <input id="modulo" name="modulo" type="text" placeholder="p.ej., CRR, Inicio, Contacto" />
+        </div>
+        <div>
+          <label for="email">Tu correo (opcional)</label>
+          <input id="email" name="email" type="email" placeholder="tucorreo@empresa.com" />
+          <div class="error" data-error-for="email"></div>
+        </div>
+      </div>
+
+      <div>
+        <label for="asunto">Asunto</label>
+        <input id="asunto" name="asunto" type="text" maxlength="120" placeholder="Resumen breve" required />
+        <div class="row-between">
+          <div class="error" data-error-for="asunto"></div>
+          <div class="counter"><span id="asuntoCount">0</span>/120</div>
+        </div>
+      </div>
+
+      <div>
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" name="descripcion" maxlength="1500" placeholder="Pasos, qué esperabas, etc." required></textarea>
+        <div class="row-between">
+          <div class="error" data-error-for="descripcion"></div>
+          <div class="counter"><span id="descCount">0</span>/1500</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <label for="adjunto">Adjunto (imagen/PDF, máx. 5 MB)</label>
+          <input id="adjunto" name="adjunto" type="file" accept="image/*,application/pdf" />
+          <div class="help">Con webhook se envía en Base64. Por correo, adjúntalo manualmente.</div>
+          <div class="error" data-error-for="adjunto"></div>
+        </div>
+        <div class="consent-wrap">
+          <label for="consent">
+            <input id="consent" name="consent" type="checkbox" required />
+            Confirmo que se puede usar esta info para dar seguimiento.
+          </label>
+          <div class="error" data-error-for="consent"></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn" id="btnBorrarBorrador" title="Eliminar borrador">Borrar borrador</button>
+        <button type="button" class="btn" id="btnPreview">Previsualizar</button>
+        <button type="submit" class="btn primary" id="btnEnviar">Enviar</button>
+      </div>
+
+      <div class="help">Se guarda automáticamente como borrador en este navegador.</div>
+      <div class="status-msg" id="statusMsg" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+  window.COMPLAINTS_WEBHOOK = "https://script.google.com/macros/s/AKfycbx_l_6c7h4DdAXqIwIAsl6B5bOG_bZbzWxZ3Me1Adh2B5RqTGI9LIl96bPqpw_fyyYR/exec";
+</script>
+<script src="js/complaints.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
