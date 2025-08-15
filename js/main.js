@@ -49,10 +49,10 @@ let currentLang = localStorage.getItem(LANG_KEY) || 'es';
 
 const i18n = {
   es: {
-    title: "Denbot SharePoint Helper",
+    title: "Lorenzo SharePoint Helper",
     subtitle: "Asistente de SharePoint",
     statusReady: " Listo",
-    typing: "Denbot · escribiendo…",
+    typing: "Lorenzo · escribiendo…",
     footnote: "Versión 1.2.0",
     quick_acceso: "Contenido",
     quick_archivos: "Contacto",
@@ -64,13 +64,13 @@ const i18n = {
     bot: "bot",
     input_placeholder: "Escribe tu mensaje…",
     send: "Enviar",
-    intro: "¡Hola! Soy DenBot. Trabajo con un <b>flujo de decisiones.</b> Usa los 2 accesos rápidos o navega con las opciones dentro del chat."
+    intro: "¡Hola! Soy Lorenzo. Trabajo con un <b>flujo de decisiones.</b> Usa los 2 accesos rápidos o navega con las opciones dentro del chat."
   },
   en: {
-    title: "Denbot SharePoint Helper",
+    title: "Lorenzo SharePoint Helper",
     subtitle: "SharePoint Assistant",
     statusReady: " Ready",
-    typing: "Denbot · typing…",
+    typing: "Lorenzo · typing…",
     footnote: "Version 1.2.0",
     quick_acceso: "Content",
     quick_archivos: "Contact",
@@ -82,7 +82,7 @@ const i18n = {
     bot: "bot",
     input_placeholder: "Type your message…",
     send: "Send",
-    intro: "Hi! I’m Denbot. I now work with a <b>decision flow</b>. Use the 2 quick actions or navigate with the chips in chat."
+    intro: "Hi! I’m Lorenzo. I now work with a <b>decision flow</b>. Use the 2 quick actions or navigate with the chips in chat."
   }
 };
 
