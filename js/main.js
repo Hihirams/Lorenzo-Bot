@@ -53,7 +53,7 @@ const i18n = {
     subtitle: "Asistente de SharePoint",
     statusReady: " Listo",
     typing: "Lorenzo · escribiendo…",
-    footnote: "Versión 1.2.0",
+    footnote: "Versión 1.3.0",
     quick_acceso: "Contenido",
     quick_archivos: "Contacto",
     quick_sp: "🔙 Volver a SharePoint",
@@ -71,7 +71,7 @@ const i18n = {
     subtitle: "SharePoint Assistant",
     statusReady: " Ready",
     typing: "Lorenzo · typing…",
-    footnote: "Version 1.2.0",
+    footnote: "Version 1.3.0",
     quick_acceso: "Content",
     quick_archivos: "Contact",
     quick_sp: "🔙 Back to SharePoint",
@@ -97,7 +97,15 @@ function applyLanguage(rerender=false){
   if (flagImg){
     flagImg.src = currentLang === 'es' ? 'img/mx-flag.png' : 'img/us-flag.png';
     flagImg.alt = currentLang === 'es' ? 'Español' : 'English';
+    updateComplaintsBtnText();
   }
+
+  function updateComplaintsBtnText() {
+  const btnText = document.getElementById('complaintsBtnText');
+  if (btnText) {
+    btnText.textContent = currentLang === 'es' ? 'Contáctanos' : 'Contact Us';
+  }
+}
 
   const title = document.querySelector('.title');
   const subtitle = document.querySelector('.subtitle');
@@ -187,7 +195,7 @@ const flows = {
           <li>Tipo de acceso requerido (lectura/edición).</li>
         </ul>
         <p>Ejemplo de solicitud clara:<br>
-        “Necesito <b>edición</b> en <i>NA_000451/CRR/FY25/DMEX/ME</i> para subir reportes semanales”.</p>
+        “Necesito <b>edición</b> en <i>NA_000451/CRR/FY25/DNMX/ME</i> para subir reportes semanales”.</p>
       `,
       options: [{ label: "Volver al inicio", next: "inicio" }]
     },
@@ -223,14 +231,14 @@ const flows = {
     crr_region: {
       text: "Reportes · CRR · FY25 — Selecciona región",
       options: [
-        { label: "DMEX", next: "crr_bu", set: { region: "DMEX" } },
+        { label: "DNMX", next: "crr_bu", set: { region: "DNMX" } },
         { label: "NL (demo)", next: "demo", set: { region: "NL" } },
         { label: "BUX (demo)", next: "demo", set: { region: "BUX" } }
       ]
     },
 
     crr_bu: {
-      text: "Reportes · CRR · FY25 · DMEX — Selecciona Business Unit",
+      text: "Reportes · CRR · FY25 · DNMX — Selecciona Business Unit",
       options: [
         { label: "ME", next: "crr_producto", set: { businessUnit: "ME" } },
         { label: "MXS APP (demo)", next: "demo", set: { businessUnit: "MXS APP" } },
@@ -242,7 +250,7 @@ const flows = {
     },
 
     crr_producto: {
-      text: "Reportes · CRR · FY25 · DMEX · ME — Selecciona producto",
+      text: "Reportes · CRR · FY25 · DNMX · ME — Selecciona producto",
       options: [
         { label: "CLUSTER", next: "crr_resumen", set: { product: "CLUSTER" } },
         { label: "COD (demo)", next: "demo", set: { product: "COD" } },
@@ -278,7 +286,7 @@ const flows = {
     },
 
     demo: {
-      text: "Ruta de demostración. El tramo funcional es: Contenido → CRR → Reportes → FY25 → DMEX → ME → CLUSTER.",
+      text: "Ruta de demostración. El tramo funcional es: Contenido → CRR → Reportes → FY25 → DNMX → ME → CLUSTER.",
       options: [{ label: "Volver al inicio", next: "inicio" }]
     }
   },
@@ -303,7 +311,7 @@ const flows = {
           <li>Access type needed (read/edit).</li>
         </ul>
         <p>Clear request example:<br>
-        “I need <b>edit</b> access to <i>NA_000451/CRR/FY25/DMEX/ME</i> to upload weekly reports”.</p>
+        “I need <b>edit</b> access to <i>NA_000451/CRR/FY25/DNMX/ME</i> to upload weekly reports”.</p>
       `,
       options: [{ label: "Back to start", next: "inicio" }]
     },
@@ -339,14 +347,14 @@ const flows = {
     crr_region: {
       text: "Reports · CRR · FY25 — Select region",
       options: [
-        { label: "DMEX", next: "crr_bu", set: { region: "DMEX" } },
+        { label: "DNMX", next: "crr_bu", set: { region: "DNMX" } },
         { label: "NL (demo)", next: "demo", set: { region: "NL" } },
         { label: "BUX (demo)", next: "demo", set: { region: "BUX" } }
       ]
     },
 
     crr_bu: {
-      text: "Reports · CRR · FY25 · DMEX — Select Business Unit",
+      text: "Reports · CRR · FY25 · DNMX — Select Business Unit",
       options: [
         { label: "ME", next: "crr_producto", set: { businessUnit: "ME" } },
         { label: "MXS APP (demo)", next: "demo", set: { businessUnit: "MXS APP" } },
@@ -358,7 +366,7 @@ const flows = {
     },
 
     crr_producto: {
-      text: "Reports · CRR · FY25 · DMEX · ME — Select product",
+      text: "Reports · CRR · FY25 · DNMX · ME — Select product",
       options: [
         { label: "CLUSTER", next: "crr_resumen", set: { product: "CLUSTER" } },
         { label: "COD (demo)", next: "demo", set: { product: "COD" } },
@@ -394,7 +402,7 @@ const flows = {
     },
 
     demo: {
-      text: "Demo route. Functional path: Content → CRR → Reports → FY25 → DMEX → ME → CLUSTER.",
+      text: "Demo route. Functional path: Content → CRR → Reports → FY25 → DNMX → ME → CLUSTER.",
       options: [{ label: "Back to start", next: "inicio" }]
     }
   }
